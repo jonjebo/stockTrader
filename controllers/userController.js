@@ -1,4 +1,6 @@
 const db = require("../models");
+
+
 module.exports = {
     signup: (req, res)=>{
         console.log(req.session);
@@ -12,14 +14,14 @@ module.exports = {
                 req.session.user=returnedUser._id
                 req.session.username=returnedUser.username
                 res.send({
-                    message:returnedUser.username + " created successfully!",
+                    message:"username " + returnedUser.username + " created",
                     loggedIn:true,
                     username:returnedUser.username
                 })
             }
         })
         .catch(err => {
-            res.send({message: "Username already taken..."})
+            res.send({message: "Username already taken, please create new username"})
         })
     },
     login: (req, res)=>{ 
@@ -30,24 +32,24 @@ module.exports = {
                     req.session.user=returnedUser._id
                     req.session.username=returnedUser.username
                     res.send({
-                        message:returnedUser.username + " logged in successfully!",
+                        message:returnedUser.username + " logged in successfully",
                         loggedIn:true,
                         username:returnedUser.username  
                     }) 
                 } else {
                     res.send({
-                        message:" password invalid...",
+                        message:" password invalid",
                         loggedIn:false,
                         username:"" 
                     })
                 }
             } else {
-                res.send({message: "Username not found..."})
+                res.send({message: "Username not found, please sign up"})
             }
             
         })
         .catch(err => {
-            res.send({message: "Username not found..."})
+            res.send({message: "Username not found, please sign up"})
         })
     },
 
@@ -55,7 +57,7 @@ module.exports = {
         req.session.user=null
         req.session.username=null
         res.send({
-            message:returnedUser.username + " logged out successfully!",
+            message:returnedUser.username + " logged out successfully",
             loggedIn:false,
             username:""  
         })

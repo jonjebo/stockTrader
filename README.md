@@ -1,2 +1,1 @@
-# stockTrader
-First Post Class Project
+# Project 3
